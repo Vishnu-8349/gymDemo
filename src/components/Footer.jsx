@@ -12,19 +12,12 @@ export default function Footer({ onOpenModal }) {
           
           {/* Brand Info (Col 1-4) */}
           <div className="lg:col-span-4 space-y-6">
-            <a href="#home" className="flex items-center gap-2.5">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#FF8A00] to-[#FFB347] flex items-center justify-center text-white shadow-[0_0_15px_rgba(255,138,0,0.4)]">
-                <Dumbbell className="w-6 h-6 transform -rotate-45" />
-              </div>
-              <div className="flex flex-col">
-                <span className="font-bebas text-2xl tracking-wider text-white flex items-center gap-1.5 leading-none">
-                  IRON<span className="text-[#FF8A00]">TURF</span>
-                  <span className="bg-[#FF8A00] text-black text-[11px] px-1.5 py-0.5 rounded font-sans font-bold tracking-normal uppercase">GYM</span>
-                </span>
-                <span className="text-[10px] text-zinc-400 font-medium uppercase tracking-widest leading-none mt-1">
-                  & FITNESS
-                </span>
-              </div>
+            <a href="#home" className="inline-block">
+              <img 
+                src="/logo.jpg" 
+                alt="IronTurf Gym & Fitness Logo" 
+                className="h-16 w-auto object-contain rounded-lg" 
+              />
             </a>
 
             <p className="text-zinc-400 text-sm leading-relaxed max-w-sm">

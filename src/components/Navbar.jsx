@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Dumbbell, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 
 export default function Navbar({ onOpenModal }) {
   const [scrolled, setScrolled] = useState(false);
@@ -7,7 +7,7 @@ export default function Navbar({ onOpenModal }) {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 30) {
+      if (window.scrollY > 50) {
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -29,24 +29,23 @@ export default function Navbar({ onOpenModal }) {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 bg-[#1B1B1B] border-b border-[#2C2C2C] py-3.5 shadow-xl transition-all">
+    <nav 
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
+        scrolled
+          ? 'bg-[#1B1B1B]/95 backdrop-blur-md border-b border-[#2C2C2C] py-3.5 shadow-2xl'
+          : 'bg-white/95 backdrop-blur-md border-b border-zinc-200/80 py-4 shadow-sm'
+      }`}
+    >
       <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
           {/* Logo */}
-          <a href="#home" className="flex items-center gap-2.5 group">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#FF8A00] to-[#FFB347] flex items-center justify-center text-white shadow-[0_0_15px_rgba(255,138,0,0.4)] group-hover:scale-105 transition-transform">
-              <Dumbbell className="w-6 h-6 transform -rotate-45" />
-            </div>
-            <div className="flex flex-col">
-              <span className="font-bebas text-2xl tracking-wider text-white flex items-center gap-1.5 leading-none">
-                IRON<span className="text-[#FF8A00]">TURF</span>
-                <span className="bg-[#FF8A00] text-black text-[11px] px-1.5 py-0.5 rounded font-sans font-bold tracking-normal uppercase">GYM</span>
-              </span>
-              <span className="text-[10px] text-zinc-400 font-medium uppercase tracking-widest leading-none mt-1">
-                & FITNESS
-              </span>
-            </div>
+          <a href="#home" className="flex items-center gap-3 group py-0.5">
+            <img 
+              src="/logo.jpg" 
+              alt="IronTurf Gym & Fitness Logo" 
+              className="h-11 sm:h-12 w-auto object-contain rounded-lg group-hover:scale-105 transition-transform duration-300" 
+            />
           </a>
 
           {/* Desktop Menu */}
@@ -55,7 +54,11 @@ export default function Navbar({ onOpenModal }) {
               <a
                 key={link.name}
                 href={link.href}
-                className="relative text-sm font-medium text-zinc-300 hover:text-white transition-colors py-1 group"
+                className={`relative text-sm font-semibold transition-colors py-1 group ${
+                  scrolled 
+                    ? 'text-zinc-300 hover:text-white' 
+                    : 'text-[#111111] hover:text-[#FF8A00]'
+                }`}
               >
                 {link.name}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-[#FF8A00] transition-all duration-300 group-hover:w-full"></span>
@@ -78,7 +81,11 @@ export default function Navbar({ onOpenModal }) {
           <div className="lg:hidden flex items-center gap-3">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 text-zinc-300 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+              className={`p-2 rounded-lg transition-colors ${
+                scrolled 
+                  ? 'text-zinc-300 hover:text-white hover:bg-zinc-800' 
+                  : 'text-[#111111] hover:text-[#FF8A00] hover:bg-zinc-100'
+              }`}
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -88,14 +95,20 @@ export default function Navbar({ onOpenModal }) {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-[#111111]/95 backdrop-blur-xl border-b border-zinc-800 px-6 py-6 space-y-4 animate-fade-in">
+        <div className={`lg:hidden backdrop-blur-xl border-b px-6 py-6 space-y-4 animate-fade-in ${
+          scrolled ? 'bg-[#111111]/95 border-zinc-800 text-white' : 'bg-white/98 border-zinc-200 text-[#111111]'
+        }`}>
           <div className="flex flex-col space-y-3">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-medium text-zinc-300 hover:text-[#FF8A00] transition-colors py-2 border-b border-zinc-900"
+                className={`text-base font-semibold transition-colors py-2 border-b ${
+                  scrolled 
+                    ? 'text-zinc-300 hover:text-[#FF8A00] border-zinc-900' 
+                    : 'text-[#111111] hover:text-[#FF8A00] border-zinc-100'
+                }`}
               >
                 {link.name}
               </a>
